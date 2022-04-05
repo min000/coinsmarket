@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 import React from 'react';
 
-const Text = styled.span`
-  text-align: center;
-  display: block;
-  color: black;t
+const Select = styled.select`
+    border: 0;
+    right: 35px;
+    position: absolute;
+    font-weight: 900;
+    float: right;
+    top: 75px;
+    cursor: pointer;
 `;
 
 function SelectBox(props) {
@@ -17,7 +21,7 @@ function SelectBox(props) {
         
     };
     return (
-        <select onChange={onChange}>
+        <Select onChange={onChange}>
             {props.options.map((option) => (
                 
                 <option
@@ -28,7 +32,7 @@ function SelectBox(props) {
                     {option.name}
                 </option>
             ))}
-        </select>
+        </Select>
     );
   }
   

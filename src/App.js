@@ -50,10 +50,18 @@ table {
 * {
   box-sizing: border-box;
 }
+html {
+  height: 100%;
+}
 body {
+  height: 100%;
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 300;
   line-height: 1.2;
+}
+#root {
+  position: relative;
+  padding: 30px;
 }
 a {
   text-decoration:none;

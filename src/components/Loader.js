@@ -10,7 +10,7 @@ const Text = styled.span`
 function Loader() {
     return (
       <Text>
-        Loading
+        Loading...
       </Text>
     );
   }

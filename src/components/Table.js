@@ -1,14 +1,67 @@
 import React from 'react';
-import { useState,useEffect } from "react";
+import { useState } from "react";
 import {useLocalStorage} from '../useLocalStorage';
 import styled from 'styled-components';
 import Modal from '../components/Modal';
+import beforeIcon from '../img/beforeIcon.png';
+import afterIcon from '../img/afterIcon.png';
 
+const TableContainer = styled.table`
+  margin: 30px auto 0;
+  width: 98%;
+  text-align: right;
+  font-size: 13px;
+  font-weight: 600;
 
-
-const LinkName = styled.div`
-cursor: pointer;
+  .tableTitle{
+    text-align: left;
+    text-indent: 20px;
+  }
+  tbody{
+    tr:last-of-type{
+      display:none;
+    }
+  }
+  tr{
+    border-bottom: 1px solid #d8d8d8;
+    border-right: 0;
+    border-left: 0;
+  }
+  th{
+    padding: 10px 5px;
+    line-height: 20px;
+    background: #d8d8d8;
+    color: #848484;
+    font-size:12px;
+  }
+  td{
+    padding: 10px 5px;
+    line-height: 20px;
+  }
 `;
+const LinkName = styled.div`
+  cursor: pointer;
+`;
+const PerBox = styled.span`
+  color: ${(props) => (props.color == "true"? "red" : "blue")};
+`;
+const Favorites = styled.div`
+  text-align: center;
+  input{
+    display:none;
+  }
+  input + label{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    background: url(${beforeIcon}) center center /cover no-repeat;
+  }
+  input:checked + label{
+    background: url(${afterIcon}) center center /cover no-repeat;
+  }
+`;
+
 
 function Table({props,currency="krw"}) {
   const titles = {
@@ -35,10 +88,9 @@ function Table({props,currency="krw"}) {
     e.preventDefault();
     setModalCoin(coinId);
     setModalVisible(true);
+    document.getElementById('root').style.overflow = "hidden";
+    document.getElementById('root').style.height = "100%";
 
-  }
-  const closeModal = () => {
-    setModalVisible(false)
   }
 
   const onChecked = (e,current) => {
@@ -64,12 +116,11 @@ function Table({props,currency="krw"}) {
 
     return (
       <>
-        <table>
+        <TableContainer>
           <thead>
             <tr>
-              {/*  */}
               <th>{titles.favorites}</th>
-              <th>{titles.name}</th>
+              <th className="tableTitle">{titles.name}</th>
               <th>{titles.symbol}</th>
               <th>{titles.current_price}</th>
               <th>{titles.price_change_percentage_1h_in_currency}</th>
@@ -81,24 +132,23 @@ function Table({props,currency="krw"}) {
           <tbody>
             {props.map(coin =>
               <tr key={coin.id}>
-                <td><input type="checkbox" checked={favoriteList.includes(coin.id)} onChange={(e)=>onChecked(e,coin)} /></td>
-                <td><LinkName onClick={(e)=>openModal(e,coin.id)}>{coin.name}</LinkName></td>
+                <td><Favorites><input type="checkbox" id={coin.id} checked={favoriteList.includes(coin.id)} onChange={(e)=>onChecked(e,coin)} /><label htmlFor={coin.id}></label></Favorites></td>
+                <td className="tableTitle"><LinkName onClick={(e)=>openModal(e,coin.id)}>{coin.name}</LinkName></td>
                 <td>{coin.symbol}</td>
-                {/* 가격 쉼표/ -+ 색구분/소수점2자리/$*/}
                 <td>{currencyCode+coin.current_price.toFixed(fixedValue).replace(replaceValue, ",")}</td>
-                <td>{coin.price_change_percentage_1h_in_currency.toFixed(fixedValue).replace(replaceValue, ",")}</td>
-                <td>{coin.price_change_percentage_24h_in_currency.toFixed(fixedValue).replace(replaceValue, ",")}</td>
-                <td>{coin.price_change_percentage_7d_in_currency.toFixed(fixedValue).replace(replaceValue, ",")}</td>
+                <td><PerBox color={coin.price_change_percentage_1h_in_currency>0?"true":"false"}>{coin.price_change_percentage_1h_in_currency.toFixed(fixedValue)}</PerBox></td>
+                <td><PerBox color={coin.price_change_percentage_24h_in_currency>0?"true":"false"}>{coin.price_change_percentage_24h_in_currency.toFixed(fixedValue)}</PerBox></td>
+                <td><PerBox color={coin.price_change_percentage_7d_in_currency>0?"true":"false"}>{coin.price_change_percentage_7d_in_currency.toFixed(fixedValue)}</PerBox></td>
                 <td>{currencyCode+coin.total_volume.toFixed(fixedValue).replace(replaceValue, ",")}</td>
               </tr>
           )}
             {console.log(props)}
             <tr><td></td></tr>
           </tbody>
-        </table>
+        </TableContainer>
         {
           modalVisible && 
-              <Modal props={modalCoin} currency={currency} visible={modalVisible}/>
+              <Modal props={modalCoin} currency={currency} visible={modalVisible} setModalVisible={setModalVisible}/>
         }
       </>
     );

@@ -12,9 +12,6 @@ function Favorites(){
   //     refetchOnWindowFocus: true,
   //   });
 
-  useEffect(() => {
-{/* 즐찾취소하면 리랜더 */}
-  }, [data]);
   return (
    <>
       <Table props={data.sort((x,y)=>x.market_cap_rank - y.market_cap_rank)}></Table>

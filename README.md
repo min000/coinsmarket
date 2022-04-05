@@ -28,3 +28,9 @@ https://goddino.tistory.com/229
 - 자식에서 onchange되면 set(데이터)값 해줬더니 됨! 개신기함
 https://velog.io/@bellecode20/%ED%95%98%EC%9C%84-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EC%97%90%EC%84%9C-%EC%83%81%EC%9C%84-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EB%A1%9C-state-%EC%A0%84%EC%86%A1%ED%95%98%EA%B8%B0
 
+### map에서 데이터가 한번 더 돈다
+왜그럴까
+
+### 컴포넌트를 더 재사용성 높게 쪼개고 싶다
+
+### 컴포넌트 단위의 테스크 적용하기

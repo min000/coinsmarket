@@ -20,8 +20,15 @@ import SelectBox from '../components/SelectBox';
 
 const BtnMore  = styled.button`
   padding: 0px 20px;
-  max-width: 480px;
   margin: 0 auto;
+  background: #fff;
+  border: 0;
+  border-bottom: 1px solid #d8d8d8;
+  padding: 10px;
+  line-height: 20px;
+  display: block;
+  width: 100%;
+  cursor: pointer;
 `;
 const OPTIONS = [
 	{ value: "krw", name: "KRW 보기" },

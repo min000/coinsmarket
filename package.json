@@ -42,5 +42,8 @@
   "description": "- useQuery - QueryClient - QueryClientProvider",
   "main": "index.js",
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "react-refresh": "^0.8.3"
+  }
 }

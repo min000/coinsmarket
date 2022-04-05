@@ -6,18 +6,22 @@ import Market from './Market';
 
 const Tabs = styled.ul`
   display: flex;
+  border: 2px solid #d8d8d8;
+  border-left: 0;
+  border-right: 0;
 `;
 
 const Tab = styled.li`
+  font-size: 15px;
+  line-height: 20px;
+  margin-right: 25px;
   text-align: center;
   text-transform: uppercase;
-  font-size: 12px;
-  font-weight: 400;
-  background-color: rgba(0, 0, 0, 0.5);
+  font-weight: 900;
   padding: 7px 0px;
   border-radius: 10px;
   color: ${(props) =>
-    props.isActive ? "red" : "black"};
+    props.isActive ? "black" : "#BDBDBD"};
   a {
     display: block;
   }
@@ -29,7 +33,7 @@ function Home(){
     return (
         <>
            <Tabs>
-            <Tab isActive={marketMatch !== null}>
+            <Tab isActive={marketMatch !== null || (marketMatch  === null && favoritesMatch === null)}>
               <Link to={`/market`}>가상자산 시세목록</Link>
             </Tab>
             <Tab isActive={favoritesMatch !== null}>
@@ -37,11 +41,11 @@ function Home(){
             </Tab>
           </Tabs>
           <Switch>
-            <Route path={`/market`}>
-              <Market />
-            </Route>
             <Route path={`/favorites`}>
               <Favorites />
+            </Route>
+            <Route path={`/`}>
+              <Market />
             </Route>
           </Switch>
         </>

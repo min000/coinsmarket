@@ -17,11 +17,6 @@ const TableContainer = styled.table`
     text-align: left;
     text-indent: 20px;
   }
-  tbody{
-    tr:last-of-type{
-      display:none;
-    }
-  }
   tr{
     border-bottom: 1px solid #d8d8d8;
     border-right: 0;
@@ -100,8 +95,6 @@ function Table({props,currency="krw"}) {
     let currentName = current.name;
     if (isChecked) {
       alert(`${currentName} 북마크가 추가되었습니다.`);
-      console.log(current);
-      console.log(current.id);
       setFavoriteList([...favoriteList, currentId]);
       setFavoriteData([...favoriteData, current]);
     // 체크 해제할 시 CheckList에서 해당 id값이 `아닌` 값만 배열에 넣기
@@ -142,8 +135,6 @@ function Table({props,currency="krw"}) {
                 <td>{currencyCode+coin.total_volume.toFixed(fixedValue).replace(replaceValue, ",")}</td>
               </tr>
           )}
-            {console.log(props)}
-            <tr><td></td></tr>
           </tbody>
         </TableContainer>
         {

@@ -8,6 +8,5 @@ export function useLocalStorage(key, initialState) {
   useEffect(() => {
     window.localStorage.setItem(key, JSON.stringify(state));
   }, [key, state]);
-//2번씩 로드되는거 해결
   return [state, setState];
 }

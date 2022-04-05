@@ -15,8 +15,6 @@ function SelectBox(props) {
 
     const onChange = (e) => {
         e.preventDefault();
-        console.log("onChange");
-        console.log(e.target.value);
         props.setCurrency(e.target.value)
         
     };

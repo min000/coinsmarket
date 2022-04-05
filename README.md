@@ -1,36 +1,67 @@
+# CoinMarket
+## 프로젝트 실행 방법
+- yarn
+```
+yarn start
+```
+- npm
+```
+npm run start
+```
+## 구현 페이지
+- 전체 목록
+- 북마크 목록
+- 상세페이지
+
+## 설계 구조 및 역할 정의
+### 1. routes
+URL에 따라 다른 페이지와 API를 랜더링 하기위한 역할
+#### Home
+- 전체목록과 북마크 목록의 공통 컴포넌트
+- Market과 Favorites의 부모 router
+- 탭을 선택하여 Market과 Favorites 페이지로 전환시켜주는 역할
+#### Market
+- 전체 목록
+- 전체 목록페이지의 API를 불러와서 Table 컴포넌트에 전달함
+- 호출 API : https://api.coingecko.com/api/v3/coins/markets
+- API 재호출 조건 : 시세통화 변경, 더보기 클릭할 때마다 추가데이터 호출
+#### Favorites
+- 북마크 목록
+- 로컬스토리지에 저장된 북마크 데이터를 불러와서 Table 컴포넌트에 전달 
+
+### 2. component
+#### Loader
+- API 호출시 로딩중임을 알리는 컴포넌트 
+#### Modal
+- 상세 페이지
+- 페이지 전환이 아닌 컴포넌트를 호출해서 팝업창으로 노출하는 방식
+- 컴포넌트 호출시 id를 전달해서 해당 id에 해당하는 코인정보를 호출함
+- 호출 API : https://api.coingecko.com/api/v3/coins/{id}
+#### SelectBox
+- Market의 컴포넌트 시세통화 변경시 API를 재호출
+
+### 3. api
+- API 호출
+- https://api.coingecko.com/api/v3/coins/markets
+- https://api.coingecko.com/api/v3/coins/{id}
+### 4. useLocalStorage
+- 북마크된 목록들 로컬스토리지에 저장하고 가져오는 역할.
+
+### 5. 실행
+앱을 실행하는 역할을 담당
+#### App.js
+#### index.js
+#### Router.js
+
 ## 라이브러리
 ### styled-components
+컴포넌트 별 css 관리와 props로 특정상황에서 구분해서 스타일을 주기 위함.
+### react
+- useState
+- useEffect
+state 관리와 state 변경시 리랜더링을 위함
 ### react-query
 - useQuery
 - QueryClient
 - QueryClientProvider
-
-https://kyounghwan01.github.io/blog/React/react-query/basic/#react-suspense%E1%84%8B%E1%85%AA-react-query-%E1%84%89%E1%85%A1%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%92%E1%85%A1%E1%84%80%E1%85%B5
-
-https://www.zigae.com/react-query-key/
-
-### useEffect
-- local storage
-https://www.daleseo.com/react-hooks-use-web-storage/
-https://www.saichoiblog.com/react-localstorage/
-
-### useState 배열에 객체값 추가하기
-https://velog.io/@summer_luna_0/reactuseState%EC%82%AC%EC%9A%A9%ED%95%B4%EC%84%9C-%EB%B0%B0%EC%97%B4%EC%97%90-%EA%B0%92-%EC%B6%94%EA%B0%80%ED%95%98%EA%B8%B0.-a.k.a-TODOLIST
-
-### 체크박스로 상태관리
-https://goddino.tistory.com/229
-
-
-### 하위 컴포넌트에서 상위 컴포넌트로 데이터 넣는 방법
-- 부모 market에서 usequery로 api fetch.
-- 부모 market에서 usestate로 api 쿼리(krw,usd)관리 해당 useState 값이 바뀌면 리랜더링 발생하면서 usequery 재패치됨
-- 자식 select에 usestate set넘김
-- 자식에서 onchange되면 set(데이터)값 해줬더니 됨! 개신기함
-https://velog.io/@bellecode20/%ED%95%98%EC%9C%84-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EC%97%90%EC%84%9C-%EC%83%81%EC%9C%84-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EB%A1%9C-state-%EC%A0%84%EC%86%A1%ED%95%98%EA%B8%B0
-
-### map에서 데이터가 한번 더 돈다
-왜그럴까
-
-### 컴포넌트를 더 재사용성 높게 쪼개고 싶다
-
-### 컴포넌트 단위의 테스크 적용하기
+API 데이터 관리와 API 처리 비동기 로직들의 관리를 위함

@@ -45,7 +45,6 @@ function Market(){
     const onClick = (e) => {
       e.preventDefault();
       setNum(current=> current+1);
-      console.log(num);
     }
 
   return (
